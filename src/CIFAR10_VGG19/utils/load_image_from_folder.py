@@ -7,11 +7,10 @@ from PIL import Image
 
 def load_images_from_folder(folder, num_images=9):
     """
-    從指定資料夾中加載圖像。
-    
-    :param folder: 資料夾路徑
-    :param num_images: 加載的圖像數量（默認為 9）
-    :return: PIL Image 對象的列表
+    Load images from a folder
+    :param folder: folder path
+    :param num_images: number of images to load
+    :return: list of images
     """
     images = []
     try:
