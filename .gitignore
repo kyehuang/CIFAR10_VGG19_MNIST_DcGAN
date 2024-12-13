@@ -6,3 +6,6 @@ __pycache__/
 
 # dataset
 dataset/
+
+# pyline
+.pylintrc
