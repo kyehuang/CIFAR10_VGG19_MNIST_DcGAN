@@ -28,11 +28,7 @@ class TestMainWindow(unittest.TestCase):
 
     def test_buttons_exist(self):
         """測試按鈕是否存在"""
-        self.assertIsNotNone(self.window.load_image_btn)
-        self.assertIsNotNone(self.window.show_augmented_btn)
-        self.assertIsNotNone(self.window.show_model_structure_btn)
-        self.assertIsNotNone(self.window.show_accuracy_loss_btn)
-        self.assertIsNotNone(self.window.inference_btn)
+        self.assertIsNotNone(self.window.button_panel)
 
     def test_image_label_initial_state(self):
         """測試圖像標籤初始狀態"""
@@ -48,6 +44,11 @@ class TestMainWindow(unittest.TestCase):
         self.assertIsNotNone(self.window.image_label.pixmap())
         self.assertEqual(self.window.prediction_label.text(), "Predicted = deer")
 
+    def test_show_augmented_images(self):
+        """
+        test show augmented images
+        """
+        self.assertTrue(self.window.button_handlers.show_augmented_images())
 
 if __name__ == "__main__":
     unittest.main()
