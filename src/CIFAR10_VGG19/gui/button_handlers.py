@@ -71,21 +71,25 @@ class ButtonHandlers:
 
 def plot_pil_images_grid(images, labels, grid_size=(3, 3), figsize=(8, 8)):
     """
-    在網格中顯示 PIL 圖像及其標籤
-    :param images: PIL.Image.Image 對象的列表
-    :param labels: 圖像對應的標籤列表
-    :param grid_size: (行數, 列數)，默認為 (3, 3)
-    :param figsize: 圖形大小
+    Plot a grid of PIL images.
+
+    Args:
+    images: List of PIL images.
+    labels: List of image labels.
+    grid_size: Tuple of grid size (rows, columns).
+    figsize: Tuple of figure size (width, height).
+
+    Returns:
+    None
     """
     fig, axes = plt.subplots(grid_size[0], grid_size[1], figsize=figsize)
-    axes = axes.flatten()  # 展平成一維數組
+    axes = axes.flatten()  
 
     for i, (image, label) in enumerate(zip(images, labels)):
-        axes[i].imshow(image)  # 顯示 PIL 圖像
+        axes[i].imshow(image)
         axes[i].set_title(label, fontsize=10)
-        axes[i].axis('off')  # 關閉坐標軸
+        axes[i].axis('on')
 
-    # 隱藏多餘的子圖
     for j in range(len(images), len(axes)):
         axes[j].axis('off')
 
