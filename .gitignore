@@ -9,3 +9,6 @@ dataset/
 
 # pyline
 .pylintrc
+
+# model
+*.pth

@@ -3,9 +3,12 @@ This file contains the class button_handlers which contains the functions for th
 click events.
 """
 import matplotlib.pyplot as plt
+import torch
+import torchsummary
 
 from src.CIFAR10_VGG19.utils.load_image_from_folder import load_images_from_folder
 from src.CIFAR10_VGG19.utils.augmented_images import AugmentedImages
+
 
 class ButtonHandlers:
     """
@@ -42,6 +45,10 @@ class ButtonHandlers:
         """
         try:
             print("Show Model Structure")
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            path = "./models/vggModel.pth"
+            model = torch.load(path)
+            torchsummary.summary(model.to(device), (3, 32, 32))
             return True
         except ImportError as e:
             print("Error: ", e)
