@@ -3,6 +3,7 @@ venv/
 
 # cache
 __pycache__/
+.DS_Store
 
 # dataset
 dataset/
@@ -12,3 +13,4 @@ dataset/
 
 # model
 *.pth
+
