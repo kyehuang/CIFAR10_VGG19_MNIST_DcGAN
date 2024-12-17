@@ -32,15 +32,16 @@ class MainWindow(QMainWindow):
         self.button_panel = ButtonPanel(self, self.button_handlers)
         self.layout.addWidget(self.button_panel)
 
-        # Image display
-        self.image_label = QLabel(self)
-        self.image_label.setAlignment(Qt.AlignCenter)
-        self.layout.addWidget(self.image_label)
+        # # Image layout
+        # # Image display
+        # self.image_label = QLabel(self)
+        # self.image_label.setAlignment(Qt.AlignCenter)
+        # self.layout.addWidget(self.image_label)
 
-        # Prediction label
-        self.prediction_label = QLabel("Predicted = ")
-        self.prediction_label.setAlignment(Qt.AlignCenter)
-        self.layout.addWidget(self.prediction_label)
+        # # Prediction label
+        # self.prediction_label = QLabel("Predicted = ")
+        # self.prediction_label.setAlignment(Qt.AlignCenter)
+        # self.layout.addWidget(self.prediction_label)
 
     def load_image(self):
         """
@@ -59,14 +60,17 @@ class ButtonPanel(QWidget):
     """
     Panel with buttons
     """
-    def __init__(self, parent, button_handler):
+    def __init__(self, parent, button_handler: ButtonHandlers):
         super().__init__(parent)
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
+        self.button_handler = button_handler
+        self.parent = parent
+        self.image_path = None
 
         # Add buttons
         self.load_image_btn = QPushButton("Load Image")
-        self.load_image_btn.clicked.connect(parent.load_image)
+        self.load_image_btn.clicked.connect(self.call_load_image)
         self.layout.addWidget(self.load_image_btn)
 
         self.show_augmented_btn = QPushButton("1. Show Augmented Images")
@@ -82,5 +86,34 @@ class ButtonPanel(QWidget):
         self.layout.addWidget(self.show_accuracy_loss_btn)
 
         self.inference_btn = QPushButton("4. Inference")
-        self.inference_btn.clicked.connect(button_handler.inference)
+        self.inference_btn.clicked.connect(self.call_inference)
         self.layout.addWidget(self.inference_btn)
+
+                # Image layout
+        # Image display
+        self.image_label = QLabel(self)
+        self.image_label.setAlignment(Qt.AlignCenter)
+        self.layout.addWidget(self.image_label)
+
+        # Prediction label
+        self.prediction_label = QLabel("Predicted = ")
+        self.prediction_label.setAlignment(Qt.AlignCenter)
+        self.layout.addWidget(self.prediction_label)
+
+    def call_inference(self):
+        """
+        Call inference
+        """
+        result = self.button_handler.do_inference(self, self.image_path)
+
+        print(result)
+
+    def call_load_image(self):
+        """
+        Load image from file
+        """
+        options = QFileDialog.Options()
+        file_name, _ = QFileDialog.getOpenFileName(self,
+                "Open Image File", "", "Images (*.png *.xpm *.jpg *.jpeg *.bmp)", options=options)
+        self.image_path = file_name
+    
