@@ -6,8 +6,9 @@ import matplotlib.pyplot as plt
 import torch
 import torchsummary
 
-from src.CIFAR10_VGG19.utils.load_image_from_folder import load_images_from_folder
-from src.CIFAR10_VGG19.utils.augmented_images import AugmentedImages
+from src.DcGAN.utils.augmented_images import augmented_images
+from src.DcGAN.DcGAN_model.build_dcGAN import build_generator, build_discriminator
+from src.DcGAN.utils.show_image import show_image
 
 
 class ButtonHandlers:
@@ -23,6 +24,7 @@ class ButtonHandlers:
         """
         try:
             print("Show Training Images")
+            augmented_images()
             return True
         except FileNotFoundError as e:
             print("Error: ", e)
@@ -37,6 +39,10 @@ class ButtonHandlers:
         """
         try:
             print("Show Model Structure")
+            generator = build_generator(1)
+            discriminator = build_discriminator(1)
+            print(generator)
+            print(discriminator)
             return True
         except ImportError as e:
             print("Error: ", e)
@@ -48,6 +54,7 @@ class ButtonHandlers:
         """
         try:
             print("Show Training Loss")
+            show_image("src/DcGAN/result/Loss.png")
             return True
         except ImportError as e:
             print("Error: ", e)
@@ -59,6 +66,7 @@ class ButtonHandlers:
         """
         try:
             print("Inference")
+            show_image("src/DcGAN/result/real_fake.png")
             return True
         except ImportError as e:
             print("Error: ", e)

@@ -38,7 +38,7 @@ class ButtonPanel(QWidget):
     """
     Panel with buttons
     """
-    def __init__(self, parent, button_handler):
+    def __init__(self, parent, button_handler: ButtonHandlers):
         super().__init__(parent)
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
